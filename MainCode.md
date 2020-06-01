@@ -1,9 +1,7 @@
 ```
 import Hardware
 import RPi.GPIO as GPIO
-import smtplib
 import time
-import ssl
 
 
 # setup
