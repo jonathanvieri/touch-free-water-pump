@@ -55,7 +55,7 @@ def pump_water(relay, input):
 		
 def main():
 	input = Distance()
-    pump_water(RELAY, input)
+	pump_water(RELAY, input)
 	
 	
 while True:
