@@ -1,0 +1,86 @@
+```
+# This code is for testing purposes
+
+# Peristaltic Pump Test
+
+import Hardware
+import time
+
+
+# Setup
+
+RELAY = Hardware.Relay(12, False)
+
+
+# Function
+
+def pump_water(relay, input):
+
+	if ( (input > 0) and (input <= 20)):		
+		relay.on()
+		print("Water is being pumped")
+	
+	else:
+		relay.off()
+		print("Water is no longer pumped")
+
+	
+while True:
+	time.sleep(2)
+	pump_water(RELAY, 10)
+
+# If wired correctly, the system should pump water for 10 second and repeat after 2 second delay
+
+
+#=====================================
+
+
+# Ultrasonic Sensor
+
+import RPi.GPIO as GPIO
+import time
+
+# Setup
+
+GPIO.setmode(GPIO.BCM)
+
+TRIG = 23
+ECHO = 24
+
+GPIO.setup( TRIG, GPIO.OUT)
+GPIO.setup( ECHO, GPIO.IN)
+
+
+# Function
+
+def Distance():
+    GPIO.output(TRIG, False)
+    time.sleep(2)
+    
+    GPIO.output(TRIG, True)
+    time.sleep(0.0001)
+    GPIO.output(TRIG, False)
+    
+    while GPIO.input(ECHO)==0:
+        time_start = time.time()
+    
+    while GPIO.input(ECHO)==1:
+        time_stop = time.time()
+        
+    time_duration = time_stop - time_start 
+    distance = time_duration * 17150
+    distance = round(distance, 2)
+    
+    return distance
+	
+	
+# Loop
+
+while True:
+	time.sleep(1)
+	input = Distance()
+	print(input)
+	
+# If wired correctly, the system should prints the distance to the console every 3 second
+
+```
